@@ -16,7 +16,7 @@
  
 ## 在线访问
  
-https://你的用户名.github.io/history-flashcard-pwa/
+https://github.com/LuDezi/history-flashcard-pwa/
  
 ## 使用方式
  
