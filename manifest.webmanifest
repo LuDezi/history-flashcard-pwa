@@ -1,7 +1,8 @@
 {
   "name": "历史背诵助手",
-  "short_name": "历史闪卡",
+  "short_name": "历史背诵助手",
   "description": "一个用于背诵历史知识的闪卡 PWA 应用，支持搜索、筛选、添加、导入导出和离线使用。",
+  "id": "./",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -11,6 +12,12 @@
   "lang": "zh-CN",
   "categories": ["education", "productivity"],
   "icons": [
+    {
+      "src": "./icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "./icons/icon-192.png",
       "sizes": "192x192",
