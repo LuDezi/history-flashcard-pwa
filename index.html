@@ -1098,12 +1098,42 @@ if (installBtn) {
 window.addEventListener('appinstalled', () => {
     showToast('历史背诵助手已安装');
     deferredInstallPrompt = null;
- 
+
     const installBtn = document.getElementById('installBtn');
     if (installBtn) {
         installBtn.style.display = 'none';
     }
 });
+
+// ===== 荣耀/华为设备 PWA 兼容处理 =====
+(function honorCompat() {
+    const ua = navigator.userAgent || '';
+    const isHonor = /honor|huawei/i.test(ua);
+    if (!isHonor) return;
+
+    // 安装事件触发后，如果图标未出现在桌面，给用户指引
+    window.addEventListener('appinstalled', () => {
+        setTimeout(() => {
+            const msg = '⚠️ 荣耀设备提示：若桌面无图标，请从 Edge 菜单(⋯)→添加到手机，手动创建快捷方式';
+            showToast(msg);
+        }, 3000);
+    });
+
+    // 在安装按钮旁也可提前告知
+    window.addEventListener('beforeinstallprompt', () => {
+        const toolbar = document.getElementById('installBtn');
+        if (toolbar && toolbar.parentElement) {
+            const existing = document.getElementById('honorInstallHint');
+            if (!existing) {
+                const hint = document.createElement('span');
+                hint.id = 'honorInstallHint';
+                hint.style.cssText = 'font-size:11px;color:#ff9800;display:block;text-align:center;margin-top:4px;';
+                hint.textContent = '荣耀设备安装后请手动添加快捷方式';
+                toolbar.parentElement.parentElement.appendChild(hint);
+            }
+        }
+    });
+})();
  
 // 注册 Service Worker
 if ('serviceWorker' in navigator) {
