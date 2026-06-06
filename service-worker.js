@@ -9,6 +9,16 @@ const APP_SHELL = [
   './icons/maskable-icon-512.png'
 ];
 
+// 在主页面添加调试代码
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(registrations => {
+    console.log('当前注册的Service Workers:', registrations);
+  });
+  
+  navigator.serviceWorker.addEventListener('message', event => {
+    console.log('收到SW消息:', event.data);
+  });
+}
 // 安装阶段：缓存应用外壳
 self.addEventListener('install', event => {
   event.waitUntil(
